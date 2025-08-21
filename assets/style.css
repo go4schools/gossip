@@ -187,11 +187,12 @@ body {
 
 
 .popup {
-	 margin: 23px auto;
+	 margin: 15% auto;
 	 padding: 20px;
 	 background: #fff;
 	 border-radius: 5px;
 	 width: 30%;
+	 height: 50%;
 	 position: relative;
 	 transition: all 5s ease-in-out;
 }
@@ -214,7 +215,7 @@ body {
 	 color: #06d85f;
 }
  .popup .content {
-	 max-height: 30%;
+	 max-height: 50%;
 	 overflow: auto;
 }
  @media screen and (max-width: 700px) {
@@ -407,6 +408,6 @@ body {
 
 .max-length:after {
     color: #e32;
-    content: "  *" " Max Length (50 Characters)";
+    content: "  *" " Max Length (256 characters!)";
     display:inline;
 }
