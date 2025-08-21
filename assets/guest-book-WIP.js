@@ -141,20 +141,17 @@ function reset_alert_count()
 function validate_text()
 {
  reset_alert_count();
- var compare_text=document.getElementById(GOOGLE_ENTRY_ID_Guestbook).value.toLowerCase();
+ var compare_text=document.getElementById(GOOGLE_ENTRY_ID_Guestbook).value;
  for(var i=0; i<swear_words_arr.length; i++)
- {var swear_word = swear_words_arr[i].toLowerCase();
-  var regex = new RegExp("\\b" + swear_word + "\\b", "g");
-  var matches = compareText.match(regex);
-  if (matches) {
-  	for(var j=0; j<(compare_text.length); j++)
-  	{
-		if(swear_words_arr[i]==compare_text.substring(j,(j+swear_words_arr[i].length)).toLowerCase())
-		{
-    		swear_alert_arr[swear_alert_count]=compare_text.substring(j,(j+swear_words_arr[i].length));
-    		swear_alert_count++;
-		}
-	}
+ {
+  for(var j=0; j<(compare_text.length); j++)
+  {
+   if(swear_words_arr[i]==compare_text.substring(j,(j+swear_words_arr[i].length)).toLowerCase())
+   {
+    swear_alert_arr[swear_alert_count]=compare_text.substring(j,(j+swear_words_arr[i].length));
+    swear_alert_count++;
+   }
+  }
  }
  var alert_text="";
  for(var k=1; k<=swear_alert_count; k++)
@@ -172,9 +169,9 @@ function validate_text()
 // Hide the input form values	 
  Gform.setAttribute("style", "display:none;");  
  // Show the user this message + the illegal character they used.
-subscribeForm.innerHTML = `	<a class="close" onclick="ResetSwearForm();" href="#">[&times;]</a>
+subscribeForm.innerHTML = `	<a class="close" onclick="ResetSwearForm();" href="#">&times;</a>
 <h1  style="text-align: center;
-    margin-top: 2em;">Hey man, slurs aren't cool. \nby the way, the following slur(s) were found:</h1> <p>${alert_text}</p>`   
+    margin-top: 2em;">Your message will not be added! \nThe following illegal words were found:</h1> <p>${alert_text}</p>`   
   // Fade message in
 subscribeForm.setAttribute("style", "-webkit-animation: fadeIn 1s; animation: fadeIn 1s;  animation-fill-mode: forwards;");  
 	 
@@ -210,7 +207,7 @@ Gform.setAttribute("style", "display:none;");
      // Show the user message their entry has been added
 subscribeForm.innerHTML = `	<a class="close" href="#">&times;</a>
 <h1 style="text-align: center;
-    margin-top: 2em;">Your Gossip has added! It will appear shortly!</h1> `   
+    margin-top: 2em;">Your Guestbook Entry Has Added! It will appear shortly!</h1> `   
   
 },500);
  }
@@ -229,11 +226,11 @@ function ResetSwearForm(){
  subscribeForm.setAttribute("style", "-webkit-animation: fadeOut 1s; animation: fadeOut 1s;  animation-fill-mode: forwards;");
  
  
-subscribeForm.innerHTML = ` <h1>Message block</h1>
-		<a class="close" href="#">[&times;]</a>
+subscribeForm.innerHTML = ` <h1>Sign The Guestbook</h1>
+		<a class="close" href="#">&times;</a>
 		<div class="content">
       <label style="display: block;
-    text-align: center;" class="aterisk_before" for="gform"> means you gotta fill it in</label>
+    text-align: center;" class="aterisk_before" for="gform"> indicates a required field</label>
       <br>
 		
     <form name="gform" id="gform" enctype="text/plain" action="${Google_Form_Link}" target="hidden_iframe">
@@ -246,24 +243,24 @@ subscribeForm.innerHTML = ` <h1>Message block</h1>
     
        <label for="${GOOGLE_ENTRY_ID_Name}"  class="aterisk_after">Name </label>
       
-        <input class="form-element short" type="text" name="${GOOGLE_ENTRY_ID_Name}" id="${GOOGLE_ENTRY_ID_Name}" placeholder="student1" style="background: #5EC6C8;" required>
+        <input class="form-element short" type="text" name="${GOOGLE_ENTRY_ID_Name}" id="${GOOGLE_ENTRY_ID_Name}" placeholder="John Doe." style="background: #5EC6C8;" required>
       
-        <label for="${GOOGLE_ENTRY_ID_Email}">Link (ignore!)</label>
+        <label for="${GOOGLE_ENTRY_ID_Email}">GitHub Username</label>
       
    
-        <input class="form-element short" type="text" name="${GOOGLE_ENTRY_ID_Email}" id="${GOOGLE_ENTRY_ID_Email}" placeholder="ignore!" style="background: #5EC6C8;">
+        <input class="form-element short" type="text" name="${GOOGLE_ENTRY_ID_Email}" id="${GOOGLE_ENTRY_ID_Email}" placeholder="MarketingPip" style="background: #5EC6C8;">
       
-   <label for="${GOOGLE_ENTRY_ID_Guestbook}"  class="max-length">Message Entry</label>
+   <label for="${GOOGLE_ENTRY_ID_Guestbook}"  class="max-length">Guestbook Entry</label>
       
       <textarea class="form-element" name="${GOOGLE_ENTRY_ID_Guestbook}" id="${GOOGLE_ENTRY_ID_Guestbook}" rows="5" cols="30" oninvalid="this.setCustomValidity('You must sign the guestbook')"
-  oninput="this.setCustomValidity('')"  maxlength="256" placeholder="Enter Your Message Here" required></textarea>
+  oninput="this.setCustomValidity('')"  maxlength="50" placeholder="Enter Your Message Here" required></textarea>
       
          <label for="g-recaptcha"  class="aterisk_after">Captcha</label>      
    <div class="g-recaptcha"
        data-sitekey="${CaptchaKey}"></div> 
       
         <input class="form-button" type="submit" value="Submit">
-        <input class="form-button" type="reset" value="Reset Message">
+        <input class="form-button" type="reset" value="Reset Form">
  
     </form>
 		</div>
